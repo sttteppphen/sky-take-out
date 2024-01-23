@@ -27,9 +27,14 @@ public class SetmealController {
     @Autowired
     private SetmealService setmealService;
 
+    /**
+     * 新增套餐
+     * @param setmealDTO
+     * @return
+     */
     @PostMapping
     @ApiOperation("新增套餐")
-    @Cacheable(cacheNames = "setmealCache", key ="#setmealDTO.categoryId")
+    @CacheEvict(cacheNames = "setmealCache", key ="#setmealDTO.categoryId")
     public Result save(@RequestBody SetmealDTO setmealDTO){
         setmealService.saveWithDish(setmealDTO);
         return Result.success();
